@@ -6,14 +6,14 @@ Built for a special case study.
 
 ## Usage
 
-```sh
+```txt
 Usage of ./message-server:
   -host string
-    	Host to bind to, e.g. localhost or 127.0.0.1 (default "localhost")
+      Host to bind to, e.g. localhost or 127.0.0.1 (default "localhost")
   -msg string
-    	Message to return for every request (default "Hello, World!")
+      Message to return for every request (default "Hello, World!")
   -port string
-    	Port to bind to (default "8081")
+      Port to bind to (default "8081")
 ```
 
 In Docker

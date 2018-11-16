@@ -2,29 +2,30 @@
 
 DOCKER_TAG ?= latest
 
-.PHONY: build-linux # Build for linux and containerize
-build-linux:
-	@GOOS=linux GOARCH=amd64 go build \
-	&& docker build -t hendrikmaus/message-server:$(DOCKER_TAG) .
+.PHONY: docker # Build docker image
+docker:
+	@docker build -t hendrikmaus/message-server:$(DOCKER_TAG) .
+	@docker tag hendrikmaus/message-server:$(DOCKER_TAG) hendrikmaus/message-server:latest
 
 .PHONY: build # Build for current platform
 build:
-	go build
+	@go build -o message-server
 
 .PHONY: run # Run locally
 run:
-	go run main.go
+	@go run main.go
 
 .PHONY: push # Push to dockerhub
 push:
 	@docker push hendrikmaus/message-server:$(DOCKER_TAG)
+	@docker push hendrikmaus/message-server:latest
 
 .PHONY: clean # Clean
 clean:
-	rm ./message-server
+	@rm ./message-server
 
 .PHONY: publish # Build, containerize and push
-publish: build-linux push clean
+publish: docker push
 
 .PHONY: help # Print help screen
 help:
